@@ -10,9 +10,18 @@ import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
+import android.view.View;
+import android.widget.ArrayAdapter;
+import android.widget.Button;
+import android.widget.ListView;
+import android.widget.Toast;
 
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
+
+    private Button button_location;
+    private Button button_category;
+    private Button button_filters;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -31,6 +40,51 @@ public class MainActivity extends AppCompatActivity
         navigationView.setNavigationItemSelectedListener(this);
 
         getSupportActionBar().setTitle(""); //"Removendo" o título da activity... Procurar uma forma "mais correta" de fazer isso.
+
+        //Carregar os Buttons:
+        this.button_location = (Button) findViewById(R.id.button_location);
+        this.button_category = (Button) findViewById(R.id.button_category);
+        this.button_filters = (Button) findViewById(R.id.button_filters);
+
+        //Adicionar função de click aos Buttons:
+        addClick();
+
+        /*Dados apenas para teste do ListView:*/
+        ListView listView_items = (ListView) findViewById(R.id.listView_items);
+
+        String[] dados = new String[] { "Cupcake", "Donut", "Eclair", "Froyo", "Gingerbread",
+                "Honeycomb", "Ice Cream Sandwich", "Jelly Bean",
+                "KitKat", "Lollipop", "Marshmallow", "Nougat", "Cupcake", "Donut", "Eclair", "Froyo", "Gingerbread",
+                "Honeycomb", "Ice Cream Sandwich", "Jelly Bean",
+                "KitKat", "Lollipop", "Marshmallow", "Nougat" };
+
+        ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, dados);
+
+        listView_items.setAdapter(adapter);
+    }
+
+    private void addClick(){
+
+        this.button_location.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Toast.makeText(getApplicationContext(), "Location", Toast.LENGTH_SHORT).show();
+            }
+        });
+
+        this.button_category.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Toast.makeText(getApplicationContext(), "Category", Toast.LENGTH_SHORT).show();
+            }
+        });
+
+        this.button_filters.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Toast.makeText(getApplicationContext(), "Filters", Toast.LENGTH_SHORT).show();
+            }
+        });
     }
 
     @Override

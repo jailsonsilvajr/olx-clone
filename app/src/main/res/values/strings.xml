@@ -22,4 +22,8 @@
 
     <string name="menu_search">Search</string>
     <string name="menu_favorite">Favoritos</string>
+
+    <string name="location">Localidade</string>
+    <string name="category">Categoria</string>
+    <string name="filters">Filtros</string>
 </resources>
