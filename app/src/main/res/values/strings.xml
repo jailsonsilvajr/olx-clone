@@ -8,13 +8,18 @@
     <string name="nav_header_desc">Navigation header</string>
     <string name="action_settings">Settings</string>
 
-    <string name="menu_home">Home</string>
-    <string name="menu_gallery">Gallery</string>
-    <string name="menu_slideshow">Slideshow</string>
-    <string name="menu_tools">Tools</string>
-    <string name="menu_share">Share</string>
-    <string name="menu_send">Send</string>
+    <string name="menu_home">Anúncios</string>
+    <string name="menu_insert">Inserir Anúncio</string>
+    <string name="menu_chat">Chat</string>
+    <string name="menu_profile">Minha Conta</string>
+    <string name="menu_support">Suporte</string>
+    <string name="menu_help">Ajuda e Contato</string>
+    <string name="menu_questions">Dúvidas Frequentes</string>
+    <string name="menu_security">Dicas de Segurança</string>
+    <string name="menu_terms">Termos de Uso</string>
+    <string name="menu_evaluate">Avalie na Google Play</string>
+    <string name="menu_facebook">Curta no Facebook</string>
 
     <string name="menu_search">Search</string>
-    <string name="menu_favorite">Favorite</string>
+    <string name="menu_favorite">Favoritos</string>
 </resources>

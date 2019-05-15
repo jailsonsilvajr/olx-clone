@@ -76,15 +76,27 @@ public class MainActivity extends AppCompatActivity
 
         if (id == R.id.nav_home) {
             // Handle the camera action
-        } else if (id == R.id.nav_gallery) {
+        } else if (id == R.id.nav_home) {
 
-        } else if (id == R.id.nav_slideshow) {
+        } else if (id == R.id.nav_insert) {
 
-        } else if (id == R.id.nav_tools) {
+        } else if (id == R.id.nav_chat) {
 
-        } else if (id == R.id.nav_share) {
+        } else if (id == R.id.nav_favorite) {
 
-        } else if (id == R.id.nav_send) {
+        } else if (id == R.id.nav_profile) {
+
+        } else if (id == R.id.nav_help) {
+
+        } else if (id == R.id.nav_questions) {
+
+        } else if (id == R.id.nav_security) {
+
+        } else if (id == R.id.nav_terms) {
+
+        } else if (id == R.id.nav_evaluate) {
+
+        } else if (id == R.id.nav_facebook) {
 
         }
 
