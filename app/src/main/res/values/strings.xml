@@ -26,4 +26,6 @@
     <string name="location">Localidade</string>
     <string name="category">Categoria</string>
     <string name="filters">Filtros</string>
+
+    <string name="clone">Clone</string>
 </resources>
