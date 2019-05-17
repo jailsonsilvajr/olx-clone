@@ -11,10 +11,15 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.View;
-import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ListView;
 import android.widget.Toast;
+
+import com.example.olxclone.entity.Poster;
+import com.example.olxclone.util.AdapterListViewPoster;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
@@ -22,6 +27,8 @@ public class MainActivity extends AppCompatActivity
     private Button button_location;
     private Button button_category;
     private Button button_filters;
+
+    private List<Poster> posters;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -52,15 +59,23 @@ public class MainActivity extends AppCompatActivity
         /*Dados apenas para teste do ListView:*/
         ListView listView_items = (ListView) findViewById(R.id.listView_items);
 
-        String[] dados = new String[] { "Cupcake", "Donut", "Eclair", "Froyo", "Gingerbread",
-                "Honeycomb", "Ice Cream Sandwich", "Jelly Bean",
-                "KitKat", "Lollipop", "Marshmallow", "Nougat", "Cupcake", "Donut", "Eclair", "Froyo", "Gingerbread",
-                "Honeycomb", "Ice Cream Sandwich", "Jelly Bean",
-                "KitKat", "Lollipop", "Marshmallow", "Nougat" };
+        this.posters = new ArrayList<Poster>();
 
-        ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, dados);
+        popularList();
+
+        AdapterListViewPoster adapter = new AdapterListViewPoster(this, this.posters);
 
         listView_items.setAdapter(adapter);
+    }
+
+    /* Método temporário: */
+    private void popularList(){
+
+        for(int i = 0; i < 20; i++){
+
+            Poster poster = new Poster(i, "Pneu", 150, 15, 05, 8, 24, "Cabo");
+            this.posters.add(poster);
+        }
     }
 
     private void addClick(){
@@ -158,4 +173,6 @@ public class MainActivity extends AppCompatActivity
         drawer.closeDrawer(GravityCompat.START);
         return true;
     }
+
+
 }
