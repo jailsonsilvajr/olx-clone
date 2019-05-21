@@ -7,4 +7,5 @@
     <color name="nav_header_text">#ffffff</color>
 
     <color name="main_tab">#ffffff</color>
+    <color name="location_tab">#ffffff</color>
 </resources>

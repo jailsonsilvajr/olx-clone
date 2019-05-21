@@ -1,6 +1,8 @@
 package com.example.olxclone;
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.support.annotation.Nullable;
 import android.support.v4.view.GravityCompat;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.view.MenuItem;
@@ -29,6 +31,8 @@ public class MainActivity extends AppCompatActivity
     private Button button_filters;
 
     private List<Poster> posters;
+
+    private static final int ACTIVITY_LOCATION_REQUEST = 1;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -83,7 +87,8 @@ public class MainActivity extends AppCompatActivity
         this.button_location.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toast.makeText(getApplicationContext(), "Location", Toast.LENGTH_SHORT).show();
+                Intent intent = new Intent(MainActivity.this, LocationActivity.class);
+                startActivityForResult(intent, ACTIVITY_LOCATION_REQUEST);
             }
         });
 
@@ -100,6 +105,17 @@ public class MainActivity extends AppCompatActivity
                 Toast.makeText(getApplicationContext(), "Filters", Toast.LENGTH_SHORT).show();
             }
         });
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        if(requestCode == ACTIVITY_LOCATION_REQUEST){
+            if(resultCode == RESULT_OK){
+                String result = data.getStringExtra("result");
+                Toast.makeText(this, result, Toast.LENGTH_SHORT).show();
+                this.button_location.setText(result);
+            }
+        }
     }
 
     @Override
@@ -173,6 +189,4 @@ public class MainActivity extends AppCompatActivity
         drawer.closeDrawer(GravityCompat.START);
         return true;
     }
-
-
 }

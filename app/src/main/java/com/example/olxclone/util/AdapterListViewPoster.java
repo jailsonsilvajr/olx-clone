@@ -41,7 +41,7 @@ public class AdapterListViewPoster extends BaseAdapter {
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
 
-        View view = this.activity.getLayoutInflater().inflate(R.layout.layout_listview, parent, false);
+        View view = this.activity.getLayoutInflater().inflate(R.layout.layout_listview_posters, parent, false);
 
         Poster poster = posters.get(position);
 

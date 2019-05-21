@@ -25,6 +25,15 @@
             android:name=".MainActivity"
             android:label="@string/title_activity_main">
         </activity>
+
+        <activity
+            android:theme="@style/AppTheme"
+            android:name=".LocationActivity"
+            android:label="@string/title_activity_region">
+        </activity>
+
     </application>
+
+
 
 </manifest>
