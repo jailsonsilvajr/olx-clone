@@ -33,6 +33,7 @@ public class MainActivity extends AppCompatActivity
     private List<Poster> posters;
 
     private static final int ACTIVITY_LOCATION_REQUEST = 1;
+    private static final int ACTIVITY_CATEGORY_REQUEST = 2;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -95,7 +96,8 @@ public class MainActivity extends AppCompatActivity
         this.button_category.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toast.makeText(getApplicationContext(), "Category", Toast.LENGTH_SHORT).show();
+                Intent intent = new Intent(MainActivity.this, CategoryActivity.class);
+                startActivityForResult(intent, ACTIVITY_CATEGORY_REQUEST);
             }
         });
 
@@ -112,8 +114,12 @@ public class MainActivity extends AppCompatActivity
         if(requestCode == ACTIVITY_LOCATION_REQUEST){
             if(resultCode == RESULT_OK){
                 String result = data.getStringExtra("result");
-                Toast.makeText(this, result, Toast.LENGTH_SHORT).show();
                 this.button_location.setText(result);
+            }
+        }else if(requestCode == ACTIVITY_CATEGORY_REQUEST){
+            if(resultCode == RESULT_OK){
+                String result = data.getStringExtra("result");
+                this.button_category.setText(result);
             }
         }
     }

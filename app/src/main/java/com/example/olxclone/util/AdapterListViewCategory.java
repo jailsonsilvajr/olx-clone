@@ -51,7 +51,7 @@ public class AdapterListViewCategory extends BaseAdapter {
         textView.setText(this.categories.get(position));
         switch (position){
 
-            case 0: imageView.setImageResource(R.mipmap.ic_category_car);
+            case 0: imageView.setImageResource(R.mipmap.ic_category_all);
             break;
 
             case 1: imageView.setImageResource(R.mipmap.ic_category_car);
@@ -88,6 +88,9 @@ public class AdapterListViewCategory extends BaseAdapter {
             break;
 
             case 12: imageView.setImageResource(R.mipmap.ic_category_car);
+            break;
+
+            case 13: imageView.setImageResource(R.mipmap.ic_category_car);
             break;
         }
 

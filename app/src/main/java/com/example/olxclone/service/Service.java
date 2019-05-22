@@ -16,7 +16,7 @@ public class Service {
     private void createCategories(){
 
         this.categories = new ArrayList<>();
-        String[] array = {"Auto e peças", "Imóveis", "Eletrônicos e celulares",
+        String[] array = {"Todas as categorias", "Auto e peças", "Imóveis", "Eletrônicos e celulares",
         "Para a sua casa", "Moda e beleza", "Esportes e lazer", "Música e hobbies",
         "Artigos infantis", "Animais de estimação", "Agro e indústria", "Comécio e escritório",
         "Serviçoes", "Vagas de emprego"};

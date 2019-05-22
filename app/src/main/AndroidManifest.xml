@@ -9,7 +9,7 @@
         android:roundIcon="@mipmap/ic_launcher_logo"
         android:supportsRtl="true"
         android:theme="@style/AppTheme.NoActionBar">
-        <activity android:name=".CategoryActivity"></activity>
+
         <activity
             android:name=".SplashActivity"
             android:label="OLX_Clone"
@@ -20,13 +20,24 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
         <activity
             android:name=".MainActivity"
-            android:label="@string/title_activity_main"></activity>
+            android:label="@string/title_activity_main">
+        </activity>
+
         <activity
             android:name=".LocationActivity"
             android:label="@string/title_activity_region"
-            android:theme="@style/AppTheme"></activity>
-    </application>
+            android:theme="@style/AppTheme">
+        </activity>
 
+        <activity
+            android:name=".CategoryActivity"
+            android:label="@string/all_categories"
+            android:theme="@style/AppTheme">
+
+        </activity>
+
+    </application>
 </manifest>

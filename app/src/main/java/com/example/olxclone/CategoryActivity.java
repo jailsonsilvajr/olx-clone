@@ -18,6 +18,10 @@ public class CategoryActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_category);
 
+        //Back button on the acationBar:
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true); //Show button
+        getSupportActionBar().setHomeButtonEnabled(true); //Activate button
+
         this.service = new Service();
 
         this.listview_categories = findViewById(R.id.listView_categories);

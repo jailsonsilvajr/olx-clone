@@ -31,4 +31,6 @@
     <string name="clone">Clone</string>
 
     <string name="text_my_location_now">Minha localização atual</string>
+
+    <string name="all_categories">Todas as categorias</string>
 </resources>
