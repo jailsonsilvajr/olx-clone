@@ -16,7 +16,7 @@ public class AdapterListViewCategory extends BaseAdapter {
     private List<String> categories;
     private Activity activity;
 
-    public AdapterListViewCategory(List<String> categories, Activity activity){
+    public AdapterListViewCategory(Activity activity, List<String> categories){
 
         this.categories = categories;
         this.activity = activity;
