@@ -14,6 +14,6 @@ public class CategoryActivity extends AppCompatActivity {
         setContentView(R.layout.activity_category);
 
         this.listview_categories = findViewById(R.id.listView_categories);
-        
+
     }
 }
