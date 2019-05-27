@@ -26,4 +26,20 @@ public class Service {
             this.categories.add(array[i]);
         }
     }
+
+    public List<String> getStates(){
+
+        List<String> states = new ArrayList<>();
+        String[] array = {"Todos os estados", "São Paulo", "Minas Gerais", "Rio de Janeiro", "Bahia",
+        "Rio Grande do Sul", "Paraná", "Pernambuco", "Ceará", "Pará", "Maranhão", "Santa Catarina", "Goiás",
+        "Paraíba", "Espírito Santo", "Amazonas", "Alagoas", "Piauí", "Rio Grande do Norte", "Mato Grosso",
+        "Distrito Federal", "Mato Grosso do Sul", "Sergipe", "Rondônia", "Tocantins", "Acre", "Amapá", "Roraima"};
+
+        for(int i = 0; i < array.length; i++){
+
+            states.add(array[i]);
+        }
+
+        return states;
+    }
 }
