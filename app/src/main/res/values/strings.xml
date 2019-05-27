@@ -2,6 +2,8 @@
     <string name="app_name">OLX Clone</string>
     <string name="title_activity_main">MainActivity</string>
     <string name="title_activity_region">Região</string>
+    <string name="title_activity_categories">Todas as categorias</string>
+    <string name="title_activity_filters">Filtros</string>
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
     <string name="nav_header_title">Jailson S.</string>
@@ -31,6 +33,4 @@
     <string name="clone">Clone</string>
 
     <string name="text_my_location_now">Minha localização atual</string>
-
-    <string name="all_categories">Todas as categorias</string>
 </resources>

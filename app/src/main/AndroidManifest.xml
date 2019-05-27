@@ -20,24 +20,21 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-
         <activity
             android:name=".MainActivity"
-            android:label="@string/title_activity_main">
-        </activity>
-
+            android:label="@string/title_activity_main"></activity>
         <activity
             android:name=".LocationActivity"
             android:label="@string/title_activity_region"
-            android:theme="@style/AppTheme">
-        </activity>
-
+            android:theme="@style/AppTheme"></activity>
         <activity
             android:name=".CategoryActivity"
-            android:label="@string/all_categories"
-            android:theme="@style/AppTheme">
-
-        </activity>
-
+            android:label="@string/title_activity_categories"
+            android:theme="@style/AppTheme"></activity>
+        <activity
+            android:name=".FilterActivity"
+            android:label="@string/title_activity_filters"
+            android:theme="@style/AppTheme"></activity>
     </application>
+
 </manifest>

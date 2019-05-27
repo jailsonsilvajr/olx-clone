@@ -1,0 +1,163 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".FilterActivity"
+    android:layout_margin="16dp">
+
+    <TextView
+        android:id="@+id/textView_localizacao"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="@color/colorPrimary"
+        android:textSize="4pt"
+        android:text="Localização"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentLeft="true"
+        android:layout_marginBottom="16dp"/>
+
+    <LinearLayout
+        android:id="@+id/linearLayout_localizacao_atual"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentRight="true">
+
+        <ImageView
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            android:src="@mipmap/ic_gps"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:textSize="4pt"
+            android:text="Usar localização atual"/>
+
+    </LinearLayout>
+
+    <Spinner
+        android:id="@+id/spinner_all_states"
+        android:layout_width="match_parent"
+        android:layout_height="32dp"
+        android:layout_below="@+id/textView_localizacao"
+        android:layout_marginBottom="16dp"
+        android:background="@drawable/background_border_line">
+
+    </Spinner>
+
+    <TextView
+        android:id="@+id/textView_ordenacao"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="16dp"
+        android:layout_below="@+id/spinner_all_states"
+        android:textColor="@color/colorPrimary"
+        android:textSize="5pt"
+        android:text="Ordenação por"/>
+
+    <TextView
+        android:id="@+id/textView_data"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="16dp"
+        android:layout_marginRight="8dp"
+        android:layout_below="@+id/textView_ordenacao"
+        android:background="@drawable/background_border"
+        android:textColor="@color/white"
+        android:textSize="6pt"
+        android:text="data"/>
+
+    <TextView
+        android:id="@+id/textView_preco"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="6pt"
+        android:textColor="@color/black"
+        android:layout_below="@id/textView_ordenacao"
+        android:background="@drawable/background_border_line_30"
+        android:layout_toEndOf="@+id/textView_data"
+        android:text="preço"/>
+
+    <TextView
+        android:id="@+id/textView_preco_rs"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="8dp"
+        android:layout_below="@+id/textView_data"
+        android:textSize="5pt"
+        android:textColor="@color/colorPrimary"
+        android:text="Preço (R$)"/>
+
+    <LinearLayout
+        android:id="@+id/linearLayout_editText"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="16dp"
+        android:layout_below="@+id/textView_preco_rs">
+
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:layout_marginRight="4dp"
+            android:background="@drawable/background_border_line"
+            android:hint="Min"/>
+
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:layout_marginLeft="4dp"
+            android:background="@drawable/background_border_line"
+            android:hint="Max"/>
+
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/textView_tipo_anunciante"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="16dp"
+        android:layout_below="@+id/linearLayout_editText"
+        android:textColor="@color/colorPrimary"
+        android:textSize="5pt"
+        android:text="Tipo de anunciante"/>
+
+    <TextView
+        android:id="@+id/textView_particular"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="16dp"
+        android:layout_marginRight="8dp"
+        android:layout_below="@+id/textView_tipo_anunciante"
+        android:background="@drawable/background_border_line_30"
+        android:textSize="5pt"
+        android:textColor="@color/black"
+        android:text="particular"/>
+
+    <TextView
+        android:id="@+id/textView_profissional"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/textView_tipo_anunciante"
+        android:layout_toEndOf="@+id/textView_particular"
+        android:background="@drawable/background_border_line_30"
+        android:textSize="5pt"
+        android:textColor="@color/black"
+        android:text="profissional"/>
+
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:background="@drawable/background_border_button_filter"
+        android:textColor="@color/white"
+        android:elevation="10dp"
+        android:text="Filtrar" />
+
+</RelativeLayout>

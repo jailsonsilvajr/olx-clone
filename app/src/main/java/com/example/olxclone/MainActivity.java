@@ -104,7 +104,9 @@ public class MainActivity extends AppCompatActivity
         this.button_filters.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toast.makeText(getApplicationContext(), "Filters", Toast.LENGTH_SHORT).show();
+                Intent intent = new Intent(MainActivity.this, FilterActivity.class);
+                startActivity(intent);
+                //Toast.makeText(getApplicationContext(), "Filters", Toast.LENGTH_SHORT).show();
             }
         });
     }
