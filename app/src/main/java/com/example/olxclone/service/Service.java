@@ -82,11 +82,12 @@ public class Service {
         return regions;
     }
 
-    public List<CityZone> getCityZone(int position){
+    public List<CityZone> getCityZone(int id_regions){
 
         List<CityZone> cityZone = new ArrayList<>();
 
-        switch (position){
+        //Switch simulando servidor:
+        switch (id_regions){
 
             case 1:{
 
@@ -115,7 +116,7 @@ public class Service {
         return cityZone;
     }
 
-    public List<Location> getLocation(int position){
+    public List<Location> getLocation(int id_cityZone){
 
         List<Location> locations = new ArrayList<>();
 

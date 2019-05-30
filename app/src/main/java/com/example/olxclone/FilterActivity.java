@@ -63,9 +63,9 @@ public class FilterActivity extends AppCompatActivity {
         /* Spinners */
     }
 
-    private void showSpinnerRegions(int position){
+    private void showSpinnerRegions(int position_state){
 
-        this.regions = service.getRegions(position);
+        this.regions = service.getRegions(position_state);
 
         List<String> regionsName = new ArrayList<>();
         for(int i = 0; i < this.regions.size(); i++){
@@ -80,9 +80,9 @@ public class FilterActivity extends AppCompatActivity {
         this.spinner_all_regions.setVisibility(View.VISIBLE);
     }
 
-    private void showSpinnerCityZone(int position){
+    private void showSpinnerCityZone(int position_region){
 
-        this.cityZone = service.getCityZone(position);
+        this.cityZone = service.getCityZone(this.regions.get(position_region).getId());
 
         List<String> cityZoneName = new ArrayList<>();
         for(int i = 0; i < this.cityZone.size(); i++){
@@ -97,11 +97,11 @@ public class FilterActivity extends AppCompatActivity {
         this.spinner_all_city_zone.setVisibility(View.VISIBLE);
     }
 
-    private void showSpinnerLocation(int position){
+    private void showSpinnerLocation(int position_cityZone){
 
-        Toast.makeText(this, position + "", Toast.LENGTH_SHORT).show();
+        Toast.makeText(this, position_cityZone + "", Toast.LENGTH_SHORT).show();
 
-        this.locations = this.service.getLocation(position);
+        this.locations = this.service.getLocation(this.cityZone.get(position_cityZone).getId());
 
         List<String> locationsName = new ArrayList<>();
         for(int i = 0; i < this.locations.size(); i++){
