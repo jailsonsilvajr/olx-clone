@@ -1,6 +1,12 @@
 package com.example.olxclone.service;
 
+import com.example.olxclone.entity.CityZone;
+import com.example.olxclone.entity.Location;
+import com.example.olxclone.entity.Region;
+
+import java.lang.reflect.Array;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 public class Service {
@@ -41,5 +47,78 @@ public class Service {
         }
 
         return states;
+    }
+
+    public List<Region> getRegions(int position){
+
+        List<Region> regions = new ArrayList<>();
+
+        switch (position){
+
+            case 1:{}
+            break;
+            case 2:{}
+            break;
+            case 3:{}
+            break;
+            case 4:{}
+            break;
+            case 5:{}
+            break;
+            case 6:{}
+            break;
+            case 7:{
+
+                Region region0 = new Region(0, "Todas as regiões");
+                Region region1 = new Region(1, "DDD 81 - Grande Recife");
+                Region region2 = new Region(2, "DDD 87 - Petrolina, Garanhuns e região");
+
+                Region[] arrayRegions = {region0, region1, region2};
+                regions = new ArrayList<>(Arrays.asList(arrayRegions));
+            }
+            break;
+        }
+
+        return regions;
+    }
+
+    public List<CityZone> getCityZone(int position){
+
+        List<CityZone> cityZone = new ArrayList<>();
+
+        switch (position){
+
+            case 1:{
+
+                CityZone cityZone0 = new CityZone(0, "Todas as cidades/zonas");
+                CityZone cityZone1 = new CityZone(1, "Grande Recife");
+                CityZone cityZone2 = new CityZone(2, "Outras cidades");
+                CityZone cityZone3 = new CityZone(3, "Recife");
+
+                CityZone[] cityZones = {cityZone0, cityZone1, cityZone2, cityZone3};
+                cityZone = new ArrayList<>(Arrays.asList(cityZones));
+            }
+            break;
+            case 2:{
+
+                CityZone cityZone0 = new CityZone(0, "Todas as cidades/zonas");
+                CityZone cityZone1 = new CityZone(1, "Região de São Francisco Pernambucano");
+                CityZone cityZone2 = new CityZone(2, "Região do Agreste Pernambucano");
+                CityZone cityZone3 = new CityZone(3, "Região do Sertão Pernambucano");
+
+                CityZone[] cityZones = {cityZone0, cityZone1, cityZone2, cityZone3};
+                cityZone = new ArrayList<>(Arrays.asList(cityZones));
+            }
+            break;
+        }
+
+        return cityZone;
+    }
+
+    public List<Location> getLocation(int position){
+
+        List<Location> locations = new ArrayList<>();
+
+        return locations;
     }
 }

@@ -9,6 +9,9 @@ import android.widget.ArrayAdapter;
 import android.widget.Spinner;
 import android.widget.Toast;
 
+import com.example.olxclone.entity.CityZone;
+import com.example.olxclone.entity.Location;
+import com.example.olxclone.entity.Region;
 import com.example.olxclone.service.Service;
 
 import java.util.ArrayList;
@@ -24,8 +27,9 @@ public class FilterActivity extends AppCompatActivity {
     private Service service;
 
     private List<String> states;
-
-    private String state_selected;
+    private List<Region> regions;
+    private List<CityZone> cityZone;
+    private List<Location> locations;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -39,8 +43,6 @@ public class FilterActivity extends AppCompatActivity {
         this.service = new Service();
         this.states = this.service.getStates();
 
-        this.state_selected = this.states.get(0);
-
         /* Spinners */
 
         this.spinner_all_states = findViewById(R.id.spinner_all_states);
@@ -48,7 +50,7 @@ public class FilterActivity extends AppCompatActivity {
         this.spinner_all_city_zone = findViewById(R.id.spinner_all_citys_zone);
         this.spinner_all_location = findViewById(R.id.spinner_all_location);
 
-        this.spinner_all_regions.setVisibility(View.GONE);
+        this.spinner_all_regions.setVisibility(View.GONE); //Deixando o Spinner não visível.
         this.spinner_all_city_zone.setVisibility(View.GONE);
         this.spinner_all_location.setVisibility(View.GONE);
 
@@ -56,14 +58,117 @@ public class FilterActivity extends AppCompatActivity {
         this.spinner_all_states.setAdapter(dataAdapter);
         dataAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
 
-        spinner_all_states.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+        addClickSpinners(); //Adicionando métodos que serão executados quando selecionar um item nos Spinner.
+
+        /* Spinners */
+    }
+
+    private void showSpinnerRegions(int position){
+
+        this.regions = service.getRegions(position);
+
+        List<String> regionsName = new ArrayList<>();
+        for(int i = 0; i < this.regions.size(); i++){
+
+            regionsName.add(this.regions.get(i).getName());
+        }
+
+        ArrayAdapter<String> dataAdapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_item, regionsName);
+        this.spinner_all_regions.setAdapter(dataAdapter);
+        dataAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+
+        this.spinner_all_regions.setVisibility(View.VISIBLE);
+    }
+
+    private void showSpinnerCityZone(int position){
+
+        this.cityZone = service.getCityZone(position);
+
+        List<String> cityZoneName = new ArrayList<>();
+        for(int i = 0; i < this.cityZone.size(); i++){
+
+            cityZoneName.add(this.cityZone.get(i).getName());
+        }
+
+        ArrayAdapter<String> dataAdapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_item, cityZoneName);
+        this.spinner_all_city_zone.setAdapter(dataAdapter);
+        dataAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+
+        this.spinner_all_city_zone.setVisibility(View.VISIBLE);
+    }
+
+    private void showSpinnerLocation(int position){
+
+        Toast.makeText(this, position + "", Toast.LENGTH_SHORT).show();
+
+        this.locations = this.service.getLocation(position);
+
+        List<String> locationsName = new ArrayList<>();
+        for(int i = 0; i < this.locations.size(); i++){
+
+            locationsName.add(this.locations.get(i).getName());
+        }
+
+        ArrayAdapter<String> dataAdapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_item, locationsName);
+        this.spinner_all_location.setAdapter(dataAdapter);
+        dataAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+
+        this.spinner_all_location.setVisibility(View.VISIBLE);
+    }
+
+    private void goneSpinnerRegions(){
+
+        this.spinner_all_regions.setVisibility(View.GONE);
+    }
+
+    private void goneSpinnerCityZone(){
+
+        this.spinner_all_city_zone.setVisibility(View.GONE);
+    }
+
+    private void goneSpinnerLocation(){
+
+        this.spinner_all_location.setVisibility(View.GONE);
+    }
+
+    private void addClickSpinners(){
+
+        this.spinner_all_states.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
 
-                if(position != 7) Toast.makeText(FilterActivity.this, "Select Pernambuco!", Toast.LENGTH_SHORT).show();
-                else{
+                if(position == 0){ //position == 0 -> Todos os estados
 
+                    goneSpinnerRegions(); //Esconder Spinner
+                    goneSpinnerCityZone();
+                    goneSpinnerLocation();
+                }else{
 
+                    showSpinnerRegions(position);
+                    goneSpinnerCityZone();
+                    goneSpinnerLocation();
+                }
+
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+
+            }
+        });
+
+        this.spinner_all_regions.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+
+                if(position == 0){
+
+                    goneSpinnerCityZone();
+                    goneSpinnerLocation();
+                }else{
+
+                    showSpinnerCityZone(position);
+                    goneSpinnerLocation();
                 }
             }
 
@@ -73,7 +178,24 @@ public class FilterActivity extends AppCompatActivity {
             }
         });
 
-        /* Spinners */
+        this.spinner_all_city_zone.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+
+                if(position == 0){
+
+                    goneSpinnerLocation();
+                }else{
+
+                    showSpinnerLocation(position);
+                }
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+
+            }
+        });
     }
 
     @Override
