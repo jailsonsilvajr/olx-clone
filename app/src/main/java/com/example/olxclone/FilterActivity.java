@@ -7,6 +7,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.TextView;
@@ -35,6 +36,8 @@ public class FilterActivity extends AppCompatActivity {
 
     private TextView textView_particular;
     private TextView textView_profissional;
+
+    private Button button_filter;
 
     private Service service;
 
@@ -105,6 +108,13 @@ public class FilterActivity extends AppCompatActivity {
         this.editText_max = findViewById(R.id.editText_max);
 
         /* EditText */
+
+        /* Button Filter */
+
+        this.button_filter = findViewById(R.id.button_filter);
+        addClickButtonFilter();
+
+        /* Button Filter */
     }
 
     private void showSpinnerRegions(int position_state){
@@ -301,6 +311,30 @@ public class FilterActivity extends AppCompatActivity {
                 type_particular = false;
             }
         });
+    }
+
+    private void addClickButtonFilter(){
+
+        this.button_filter.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                submitFiltersForMain();
+            }
+        });
+    }
+
+    private void submitFiltersForMain(){
+
+        Toast.makeText(this, "State: " + arrayFilterLocation[0] + "\n" +
+                                          "Region: " + arrayFilterLocation[1] + "\n" +
+                                          "City/Zone: " + arrayFilterLocation[2] + "\n" +
+                                          "Ordenation date: " + ordenationDate + "\n" +
+                                          "Ordenation price: " + ordenationPrice + "\n" +
+                                          "Min: " + this.editText_min.getText().toString() + "\n" +
+                                          "Max: " + this.editText_max.getText().toString() + "\n" +
+                                          "Type particular: " + type_particular + "\n" +
+                                          "Type profissional: " + type_profissional, Toast.LENGTH_LONG).show();
     }
 
     private void setArrayFilterLocation(int index, int id){
