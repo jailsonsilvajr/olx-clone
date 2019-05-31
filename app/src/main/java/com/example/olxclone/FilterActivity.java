@@ -32,6 +32,9 @@ public class FilterActivity extends AppCompatActivity {
     private EditText editText_min;
     private EditText editText_max;
 
+    private TextView textView_particular;
+    private TextView textView_profissional;
+
     private Service service;
 
     private List<String> states;
@@ -42,6 +45,8 @@ public class FilterActivity extends AppCompatActivity {
     private int[] arrayFilterLocation = {0, 0, 0, 0}; //1º - State; 2º - Region; 3º - City/Zone; 4º - Location
     private boolean ordenationData;
     private boolean ordenationPrice;
+    private boolean type_particular;
+    private boolean type_profissional;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -58,6 +63,10 @@ public class FilterActivity extends AppCompatActivity {
         //Critérios para ordenação
         this.ordenationData = false;
         this.ordenationPrice = false;
+
+        //Tipo de anúncio:
+        this.type_particular = false;
+        this.type_profissional = false;
 
         /* Spinners */
 
@@ -78,10 +87,13 @@ public class FilterActivity extends AppCompatActivity {
 
         /* Spinners */
 
-        /* TextView Ordenation */
+        /* TextView Ordenation and type*/
 
         this.textView_date_ordenation = findViewById(R.id.textView_data);
         this.textView_price_ordenation = findViewById(R.id.textView_preco);
+
+        this.textView_particular = findViewById(R.id.textView_particular);
+        this.textView_profissional = findViewById(R.id.textView_profissional);
         addClickTextViewOrdenation();
 
         /* TextView Ordenation */
@@ -268,6 +280,36 @@ public class FilterActivity extends AppCompatActivity {
 
                 ordenationPrice = true;
                 ordenationData = false;
+            }
+        });
+
+        this.textView_particular.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                textView_particular.setBackground(ContextCompat.getDrawable(FilterActivity.this, R.drawable.background_border));
+                textView_particular.setTextColor(ContextCompat.getColor(FilterActivity.this, R.color.white));
+
+                textView_profissional.setBackground(ContextCompat.getDrawable(FilterActivity.this, R.drawable.background_border_line_30));
+                textView_profissional.setTextColor(ContextCompat.getColor(FilterActivity.this, R.color.black));
+
+                type_particular = true;
+                type_profissional = false;
+            }
+        });
+
+        this.textView_profissional.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                textView_profissional.setBackground(ContextCompat.getDrawable(FilterActivity.this, R.drawable.background_border));
+                textView_profissional.setTextColor(ContextCompat.getColor(FilterActivity.this, R.color.white));
+
+                textView_particular.setBackground(ContextCompat.getDrawable(FilterActivity.this, R.drawable.background_border_line_30));
+                textView_particular.setTextColor(ContextCompat.getColor(FilterActivity.this, R.color.black));
+
+                type_profissional = true;
+                type_particular = false;
             }
         });
     }

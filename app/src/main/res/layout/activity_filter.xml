@@ -97,8 +97,8 @@
         android:layout_marginBottom="16dp"
         android:layout_marginRight="8dp"
         android:layout_below="@+id/textView_ordenacao"
-        android:background="@drawable/background_border"
-        android:textColor="@color/white"
+        android:background="@drawable/background_border_line_30"
+        android:textColor="@color/black"
         android:textSize="6pt"
         android:text="data"/>
 
