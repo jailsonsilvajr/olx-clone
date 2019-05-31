@@ -1,5 +1,6 @@
 package com.example.olxclone;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
@@ -17,6 +18,7 @@ import com.example.olxclone.entity.CityZone;
 import com.example.olxclone.entity.Location;
 import com.example.olxclone.entity.Region;
 import com.example.olxclone.service.Service;
+import com.example.olxclone.util.ReturnFilters;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -326,7 +328,7 @@ public class FilterActivity extends AppCompatActivity {
 
     private void submitFiltersForMain(){
 
-        Toast.makeText(this, "State: " + arrayFilterLocation[0] + "\n" +
+        /*Toast.makeText(this, "State: " + arrayFilterLocation[0] + "\n" +
                                           "Region: " + arrayFilterLocation[1] + "\n" +
                                           "City/Zone: " + arrayFilterLocation[2] + "\n" +
                                           "Ordenation date: " + ordenationDate + "\n" +
@@ -334,7 +336,23 @@ public class FilterActivity extends AppCompatActivity {
                                           "Min: " + this.editText_min.getText().toString() + "\n" +
                                           "Max: " + this.editText_max.getText().toString() + "\n" +
                                           "Type particular: " + type_particular + "\n" +
-                                          "Type profissional: " + type_profissional, Toast.LENGTH_LONG).show();
+                                          "Type profissional: " + type_profissional, Toast.LENGTH_LONG).show();*/
+
+        ReturnFilters returnFilters = new ReturnFilters(arrayFilterLocation[0],
+                arrayFilterLocation[1],
+                arrayFilterLocation[2],
+                arrayFilterLocation[3],
+                ordenationDate,
+                ordenationPrice,
+                Float.parseFloat(this.editText_min.getText().toString() + 0),
+                Float.parseFloat(this.editText_max.getText().toString() + 0),
+                type_particular,
+                type_profissional);
+
+        Intent resultFilter = new Intent();
+        resultFilter.putExtra("resultFilters", returnFilters);
+        setResult(RESULT_OK, resultFilter);
+        finish();
     }
 
     private void setArrayFilterLocation(int index, int id){
