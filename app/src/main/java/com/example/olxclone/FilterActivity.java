@@ -1,12 +1,14 @@
 package com.example.olxclone;
 
 import android.os.Bundle;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Spinner;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.olxclone.entity.CityZone;
@@ -24,12 +26,18 @@ public class FilterActivity extends AppCompatActivity {
     private Spinner spinner_all_city_zone;
     private Spinner spinner_all_location;
 
+    private TextView textView_date_ordenation;
+    private TextView textView_price_ordenation;
+
     private Service service;
 
     private List<String> states;
     private List<Region> regions;
     private List<CityZone> cityZone;
     private List<Location> locations;
+
+    private boolean ordenationData;
+    private boolean ordenationPrice;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -42,6 +50,10 @@ public class FilterActivity extends AppCompatActivity {
 
         this.service = new Service();
         this.states = this.service.getStates();
+
+        //Critérios para ordenação
+        this.ordenationData = false;
+        this.ordenationPrice = false;
 
         /* Spinners */
 
@@ -61,6 +73,14 @@ public class FilterActivity extends AppCompatActivity {
         addClickSpinners(); //Adicionando métodos que serão executados quando selecionar um item nos Spinner.
 
         /* Spinners */
+
+        /* TextView Ordenation */
+
+        this.textView_date_ordenation = findViewById(R.id.textView_data);
+        this.textView_price_ordenation = findViewById(R.id.textView_preco);
+        addClickTextViewOrdenation();
+
+        /* TextView Ordenation */
     }
 
     private void showSpinnerRegions(int position_state){
@@ -194,6 +214,39 @@ public class FilterActivity extends AppCompatActivity {
             @Override
             public void onNothingSelected(AdapterView<?> parent) {
 
+            }
+        });
+    }
+
+    private void addClickTextViewOrdenation(){
+
+        this.textView_date_ordenation.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                textView_date_ordenation.setBackground(ContextCompat.getDrawable(FilterActivity.this, R.drawable.background_border));
+                textView_date_ordenation.setTextColor(ContextCompat.getColor(FilterActivity.this, R.color.white));
+
+                textView_price_ordenation.setBackground(ContextCompat.getDrawable(FilterActivity.this, R.drawable.background_border_line_30));
+                textView_price_ordenation.setTextColor(ContextCompat.getColor(FilterActivity.this, R.color.black));
+
+                ordenationData = true;
+                ordenationPrice = false;
+            }
+        });
+
+        this.textView_price_ordenation.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                textView_date_ordenation.setBackground(ContextCompat.getDrawable(FilterActivity.this, R.drawable.background_border_line_30));
+                textView_date_ordenation.setTextColor(ContextCompat.getColor(FilterActivity.this, R.color.black));
+
+                textView_price_ordenation.setBackground(ContextCompat.getDrawable(FilterActivity.this, R.drawable.background_border));
+                textView_price_ordenation.setTextColor(ContextCompat.getColor(FilterActivity.this, R.color.white));
+
+                ordenationPrice = true;
+                ordenationData = false;
             }
         });
     }
