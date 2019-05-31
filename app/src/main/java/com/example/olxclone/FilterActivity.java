@@ -9,7 +9,6 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Spinner;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.example.olxclone.entity.CityZone;
 import com.example.olxclone.entity.Location;
@@ -36,6 +35,7 @@ public class FilterActivity extends AppCompatActivity {
     private List<CityZone> cityZone;
     private List<Location> locations;
 
+    private int[] arrayFilterLocation = {0, 0, 0, 0}; //1º - State; 2º - Region; 3º - City/Zone; 4º - Location
     private boolean ordenationData;
     private boolean ordenationPrice;
 
@@ -102,7 +102,8 @@ public class FilterActivity extends AppCompatActivity {
 
     private void showSpinnerCityZone(int position_region){
 
-        this.cityZone = service.getCityZone(this.regions.get(position_region).getId());
+        int id_region = this.regions.get(position_region).getId();
+        this.cityZone = service.getCityZone(id_region);
 
         List<String> cityZoneName = new ArrayList<>();
         for(int i = 0; i < this.cityZone.size(); i++){
@@ -119,9 +120,8 @@ public class FilterActivity extends AppCompatActivity {
 
     private void showSpinnerLocation(int position_cityZone){
 
-        Toast.makeText(this, position_cityZone + "", Toast.LENGTH_SHORT).show();
-
-        this.locations = this.service.getLocation(this.cityZone.get(position_cityZone).getId());
+        int id_cityZone = this.cityZone.get(position_cityZone).getId();
+        this.locations = this.service.getLocation(id_cityZone);
 
         List<String> locationsName = new ArrayList<>();
         for(int i = 0; i < this.locations.size(); i++){
@@ -144,16 +144,20 @@ public class FilterActivity extends AppCompatActivity {
 
                 if(position == 0){ //position == 0 -> Todos os estados
 
+                    setArrayFilterLocation(0, 0);
                     spinner_all_regions.setVisibility(View.GONE); //Esconder Spinners
                     spinner_all_city_zone.setVisibility(View.GONE);
                     spinner_all_location.setVisibility(View.GONE);
                 }else{
 
+                    setArrayFilterLocation(0, position);
                     showSpinnerRegions(position);
                     spinner_all_city_zone.setVisibility(View.GONE);
                     spinner_all_location.setVisibility(View.GONE);
                 }
-
+                setArrayFilterLocation(1, 0);
+                setArrayFilterLocation(2, 0);
+                setArrayFilterLocation(3, 0);
             }
 
             @Override
@@ -168,13 +172,17 @@ public class FilterActivity extends AppCompatActivity {
 
                 if(position == 0){
 
+                    setArrayFilterLocation(1, 0);
                     spinner_all_city_zone.setVisibility(View.GONE);
                     spinner_all_location.setVisibility(View.GONE);
                 }else{
 
+                    setArrayFilterLocation(1, regions.get(position).getId());
                     showSpinnerCityZone(position);
                     spinner_all_location.setVisibility(View.GONE);
                 }
+                setArrayFilterLocation(2, 0);
+                setArrayFilterLocation(3, 0);
             }
 
             @Override
@@ -189,11 +197,28 @@ public class FilterActivity extends AppCompatActivity {
 
                 if(position == 0){
 
+                    setArrayFilterLocation(2, 0);
                     spinner_all_location.setVisibility(View.GONE);
                 }else{
 
+                    setArrayFilterLocation(2, cityZone.get(position).getId());
                     showSpinnerLocation(position);
                 }
+                setArrayFilterLocation(3, 0);
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+
+            }
+        });
+
+        this.spinner_all_location.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+
+                if(position == 0) setArrayFilterLocation(3, 0);
+                else setArrayFilterLocation(3, locations.get(position).getId());
             }
 
             @Override
@@ -234,6 +259,11 @@ public class FilterActivity extends AppCompatActivity {
                 ordenationData = false;
             }
         });
+    }
+
+    private void setArrayFilterLocation(int index, int id){
+
+        this.arrayFilterLocation[index] = id;
     }
 
     @Override
