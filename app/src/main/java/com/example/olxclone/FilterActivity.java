@@ -10,6 +10,7 @@ import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.olxclone.entity.CityZone;
 import com.example.olxclone.entity.Location;
@@ -43,7 +44,7 @@ public class FilterActivity extends AppCompatActivity {
     private List<Location> locations;
 
     private int[] arrayFilterLocation = {0, 0, 0, 0}; //1º - State; 2º - Region; 3º - City/Zone; 4º - Location
-    private boolean ordenationData;
+    private boolean ordenationDate;
     private boolean ordenationPrice;
     private boolean type_particular;
     private boolean type_profissional;
@@ -61,7 +62,7 @@ public class FilterActivity extends AppCompatActivity {
         this.states = this.service.getStates();
 
         //Critérios para ordenação
-        this.ordenationData = false;
+        this.ordenationDate = false;
         this.ordenationPrice = false;
 
         //Tipo de anúncio:
@@ -94,7 +95,7 @@ public class FilterActivity extends AppCompatActivity {
 
         this.textView_particular = findViewById(R.id.textView_particular);
         this.textView_profissional = findViewById(R.id.textView_profissional);
-        addClickTextViewOrdenation();
+        addClickTextViewOrdenationAndType();
 
         /* TextView Ordenation */
 
@@ -251,19 +252,22 @@ public class FilterActivity extends AppCompatActivity {
         });
     }
 
-    private void addClickTextViewOrdenation(){
+    private void changeBackgroundTextView(TextView textViewClick, TextView textViewNoClick){
+
+        textViewClick.setBackground(ContextCompat.getDrawable(FilterActivity.this, R.drawable.background_border));
+        textViewClick.setTextColor(ContextCompat.getColor(FilterActivity.this, R.color.white));
+        textViewNoClick.setBackground(ContextCompat.getDrawable(FilterActivity.this, R.drawable.background_border_line_30));
+        textViewNoClick.setTextColor(ContextCompat.getColor(FilterActivity.this, R.color.black));
+    }
+
+    private void addClickTextViewOrdenationAndType(){
 
         this.textView_date_ordenation.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
-                textView_date_ordenation.setBackground(ContextCompat.getDrawable(FilterActivity.this, R.drawable.background_border));
-                textView_date_ordenation.setTextColor(ContextCompat.getColor(FilterActivity.this, R.color.white));
-
-                textView_price_ordenation.setBackground(ContextCompat.getDrawable(FilterActivity.this, R.drawable.background_border_line_30));
-                textView_price_ordenation.setTextColor(ContextCompat.getColor(FilterActivity.this, R.color.black));
-
-                ordenationData = true;
+                changeBackgroundTextView(textView_date_ordenation, textView_price_ordenation);
+                ordenationDate = true;
                 ordenationPrice = false;
             }
         });
@@ -272,14 +276,9 @@ public class FilterActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
 
-                textView_date_ordenation.setBackground(ContextCompat.getDrawable(FilterActivity.this, R.drawable.background_border_line_30));
-                textView_date_ordenation.setTextColor(ContextCompat.getColor(FilterActivity.this, R.color.black));
-
-                textView_price_ordenation.setBackground(ContextCompat.getDrawable(FilterActivity.this, R.drawable.background_border));
-                textView_price_ordenation.setTextColor(ContextCompat.getColor(FilterActivity.this, R.color.white));
-
+                changeBackgroundTextView(textView_price_ordenation, textView_date_ordenation);
                 ordenationPrice = true;
-                ordenationData = false;
+                ordenationDate = false;
             }
         });
 
@@ -287,12 +286,7 @@ public class FilterActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
 
-                textView_particular.setBackground(ContextCompat.getDrawable(FilterActivity.this, R.drawable.background_border));
-                textView_particular.setTextColor(ContextCompat.getColor(FilterActivity.this, R.color.white));
-
-                textView_profissional.setBackground(ContextCompat.getDrawable(FilterActivity.this, R.drawable.background_border_line_30));
-                textView_profissional.setTextColor(ContextCompat.getColor(FilterActivity.this, R.color.black));
-
+                changeBackgroundTextView(textView_particular, textView_profissional);
                 type_particular = true;
                 type_profissional = false;
             }
@@ -302,12 +296,7 @@ public class FilterActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
 
-                textView_profissional.setBackground(ContextCompat.getDrawable(FilterActivity.this, R.drawable.background_border));
-                textView_profissional.setTextColor(ContextCompat.getColor(FilterActivity.this, R.color.white));
-
-                textView_particular.setBackground(ContextCompat.getDrawable(FilterActivity.this, R.drawable.background_border_line_30));
-                textView_particular.setTextColor(ContextCompat.getColor(FilterActivity.this, R.color.black));
-
+                changeBackgroundTextView(textView_profissional, textView_particular);
                 type_profissional = true;
                 type_particular = false;
             }
