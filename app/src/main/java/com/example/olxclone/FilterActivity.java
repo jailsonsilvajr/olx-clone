@@ -136,21 +136,6 @@ public class FilterActivity extends AppCompatActivity {
         this.spinner_all_location.setVisibility(View.VISIBLE);
     }
 
-    private void goneSpinnerRegions(){
-
-        this.spinner_all_regions.setVisibility(View.GONE);
-    }
-
-    private void goneSpinnerCityZone(){
-
-        this.spinner_all_city_zone.setVisibility(View.GONE);
-    }
-
-    private void goneSpinnerLocation(){
-
-        this.spinner_all_location.setVisibility(View.GONE);
-    }
-
     private void addClickSpinners(){
 
         this.spinner_all_states.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
@@ -159,14 +144,14 @@ public class FilterActivity extends AppCompatActivity {
 
                 if(position == 0){ //position == 0 -> Todos os estados
 
-                    goneSpinnerRegions(); //Esconder Spinner
-                    goneSpinnerCityZone();
-                    goneSpinnerLocation();
+                    spinner_all_regions.setVisibility(View.GONE); //Esconder Spinners
+                    spinner_all_city_zone.setVisibility(View.GONE);
+                    spinner_all_location.setVisibility(View.GONE);
                 }else{
 
                     showSpinnerRegions(position);
-                    goneSpinnerCityZone();
-                    goneSpinnerLocation();
+                    spinner_all_city_zone.setVisibility(View.GONE);
+                    spinner_all_location.setVisibility(View.GONE);
                 }
 
             }
@@ -183,12 +168,12 @@ public class FilterActivity extends AppCompatActivity {
 
                 if(position == 0){
 
-                    goneSpinnerCityZone();
-                    goneSpinnerLocation();
+                    spinner_all_city_zone.setVisibility(View.GONE);
+                    spinner_all_location.setVisibility(View.GONE);
                 }else{
 
                     showSpinnerCityZone(position);
-                    goneSpinnerLocation();
+                    spinner_all_location.setVisibility(View.GONE);
                 }
             }
 
@@ -204,7 +189,7 @@ public class FilterActivity extends AppCompatActivity {
 
                 if(position == 0){
 
-                    goneSpinnerLocation();
+                    spinner_all_location.setVisibility(View.GONE);
                 }else{
 
                     showSpinnerLocation(position);
