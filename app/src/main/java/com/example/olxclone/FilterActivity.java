@@ -7,6 +7,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.TextView;
 
@@ -27,6 +28,9 @@ public class FilterActivity extends AppCompatActivity {
 
     private TextView textView_date_ordenation;
     private TextView textView_price_ordenation;
+
+    private EditText editText_min;
+    private EditText editText_max;
 
     private Service service;
 
@@ -81,6 +85,13 @@ public class FilterActivity extends AppCompatActivity {
         addClickTextViewOrdenation();
 
         /* TextView Ordenation */
+
+        /* EditText */
+
+        this.editText_min = findViewById(R.id.editText_min);
+        this.editText_max = findViewById(R.id.editText_max);
+
+        /* EditText */
     }
 
     private void showSpinnerRegions(int position_state){
