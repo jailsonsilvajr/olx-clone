@@ -2,52 +2,46 @@
 <LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="150dp">
+    android:layout_height="150dp"
+    >
+
+    <ImageView
+        android:id="@+id/imageView_poster"
+        android:layout_width="150dp"
+        android:layout_height="match_parent"
+        android:src="@drawable/img_anuncio"/>
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="150dp"
-        android:elevation="10dp"
-        android:layout_margin="8dp">
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:layout_marginLeft="16dp">
 
-        <ImageView
-            android:id="@+id/imageView_poster"
-            android:layout_width="150dp"
-            android:layout_height="match_parent"
-            android:src="@drawable/img_anuncio"/>
-
-        <LinearLayout
+        <TextView
+            android:id="@+id/textView_title"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:orientation="vertical"
-            android:layout_marginLeft="16dp">
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:gravity="center_vertical"
+            android:textSize="6pt"
+            android:text="Adesivos Levanta-Seios Lifts - Par"/>
 
-            <TextView
-                android:id="@+id/textView_title"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:gravity="center_vertical"
-                android:textSize="6pt"
-                android:text="Adesivos Levanta-Seios Lifts - Par"/>
+        <TextView
+            android:id="@+id/textView_price"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:gravity="center_vertical"
+            android:textSize="8pt"
+            android:text="R$300"/>
 
-            <TextView
-                android:id="@+id/textView_price"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:gravity="center_vertical"
-                android:textSize="8pt"
-                android:text="R$300"/>
-
-            <TextView
-                android:id="@+id/textView_date_time_location"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:gravity="center_vertical"
-                android:textSize="5pt"
-                android:text="15 maio 08:24, 2 Unidos"/>
-        </LinearLayout>
+        <TextView
+            android:id="@+id/textView_date_time_location"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:gravity="center_vertical"
+            android:textSize="5pt"
+            android:text="15 maio 08:24, 2 Unidos"/>
     </LinearLayout>
 </LinearLayout>

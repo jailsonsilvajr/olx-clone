@@ -13,6 +13,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.ListView;
 import android.widget.Toast;
@@ -32,6 +33,9 @@ public class MainActivity extends AppCompatActivity
     private Button button_filters;
 
     private List<Poster> posters;
+
+    private ListView listView_items;
+    private AdapterListViewPoster adapterListViewPoster;
 
     private static final int ACTIVITY_LOCATION_REQUEST = 1;
     private static final int ACTIVITY_CATEGORY_REQUEST = 2;
@@ -60,19 +64,16 @@ public class MainActivity extends AppCompatActivity
         this.button_category = (Button) findViewById(R.id.button_category);
         this.button_filters = (Button) findViewById(R.id.button_filters);
 
-        //Adicionar função de click aos Buttons:
-        addClick();
-
         /*Dados apenas para teste do ListView:*/
-        ListView listView_items = (ListView) findViewById(R.id.listView_items);
-
         this.posters = new ArrayList<Poster>();
-
         popularList();
 
-        AdapterListViewPoster adapter = new AdapterListViewPoster(this, this.posters);
+        this.listView_items = (ListView) findViewById(R.id.listView_items);
+        this.adapterListViewPoster = new AdapterListViewPoster(this, this.posters);
+        listView_items.setAdapter(adapterListViewPoster);
 
-        listView_items.setAdapter(adapter);
+        //Adicionar função de click aos Buttons e ListView:
+        addClick();
     }
 
     /* Método temporário: */
@@ -108,6 +109,14 @@ public class MainActivity extends AppCompatActivity
             public void onClick(View v) {
                 Intent intent = new Intent(MainActivity.this, FilterActivity.class);
                 startActivityForResult(intent, ACTIVITY_FILTER_REQUEST);
+            }
+        });
+
+        this.listView_items.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+
+
             }
         });
     }
