@@ -19,6 +19,7 @@ import android.widget.Toast;
 
 import com.example.olxclone.entity.Poster;
 import com.example.olxclone.util.AdapterListViewPoster;
+import com.example.olxclone.util.ReturnFilters;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -34,6 +35,7 @@ public class MainActivity extends AppCompatActivity
 
     private static final int ACTIVITY_LOCATION_REQUEST = 1;
     private static final int ACTIVITY_CATEGORY_REQUEST = 2;
+    private static final int ACTIVITY_FILTER_REQUEST = 3;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -105,8 +107,7 @@ public class MainActivity extends AppCompatActivity
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(MainActivity.this, FilterActivity.class);
-                startActivity(intent);
-                //Toast.makeText(getApplicationContext(), "Filters", Toast.LENGTH_SHORT).show();
+                startActivityForResult(intent, ACTIVITY_FILTER_REQUEST);
             }
         });
     }
@@ -122,6 +123,10 @@ public class MainActivity extends AppCompatActivity
             if(resultCode == RESULT_OK){
                 String result = data.getStringExtra("result");
                 this.button_category.setText(result);
+            }
+        } else if(requestCode == ACTIVITY_FILTER_REQUEST){
+            if(resultCode == RESULT_OK){
+                ReturnFilters returnFilters = (ReturnFilters) data.getExtras().getSerializable("resultFilters");
             }
         }
     }
