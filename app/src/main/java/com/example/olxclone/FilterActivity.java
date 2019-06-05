@@ -328,24 +328,14 @@ public class FilterActivity extends AppCompatActivity {
 
     private void submitFiltersForMain(){
 
-        /*Toast.makeText(this, "State: " + arrayFilterLocation[0] + "\n" +
-                                          "Region: " + arrayFilterLocation[1] + "\n" +
-                                          "City/Zone: " + arrayFilterLocation[2] + "\n" +
-                                          "Ordenation date: " + ordenationDate + "\n" +
-                                          "Ordenation price: " + ordenationPrice + "\n" +
-                                          "Min: " + this.editText_min.getText().toString() + "\n" +
-                                          "Max: " + this.editText_max.getText().toString() + "\n" +
-                                          "Type particular: " + type_particular + "\n" +
-                                          "Type profissional: " + type_profissional, Toast.LENGTH_LONG).show();*/
-
         ReturnFilters returnFilters = new ReturnFilters(arrayFilterLocation[0],
                 arrayFilterLocation[1],
                 arrayFilterLocation[2],
                 arrayFilterLocation[3],
                 ordenationDate,
                 ordenationPrice,
-                Float.parseFloat(this.editText_min.getText().toString() + 0),
-                Float.parseFloat(this.editText_max.getText().toString() + 0),
+                Float.parseFloat(this.editText_min.getText().toString().isEmpty() ? "0" : this.editText_min.getText().toString()),
+                Float.parseFloat(this.editText_max.getText().toString().isEmpty() ? "0" : this.editText_max.getText().toString()),
                 type_particular,
                 type_profissional);
 
