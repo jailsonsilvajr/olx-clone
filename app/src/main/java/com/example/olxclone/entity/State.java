@@ -1,23 +1,15 @@
 package com.example.olxclone.entity;
 
-import android.media.Image;
+import java.io.Serializable;
 
-public class Category {
+public class State implements Serializable {
 
     private int id;
     private String name;
 
-    public Category(int id, String name){
+    public State(int id, String name){
 
         this.id = id;
-        this.name = name;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
         this.name = name;
     }
 
@@ -27,5 +19,13 @@ public class Category {
 
     public void setId(int id) {
         this.id = id;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
     }
 }

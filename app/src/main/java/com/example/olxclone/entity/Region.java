@@ -1,6 +1,8 @@
 package com.example.olxclone.entity;
 
-public class Region {
+import java.io.Serializable;
+
+public class Region implements Serializable {
 
     private int id;
     private String name;

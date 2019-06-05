@@ -12,13 +12,13 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.example.olxclone.entity.CityZone;
 import com.example.olxclone.entity.Location;
 import com.example.olxclone.entity.Region;
+import com.example.olxclone.entity.State;
 import com.example.olxclone.service.Service;
-import com.example.olxclone.util.ReturnFilters;
+import com.example.olxclone.util.Filter;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -43,7 +43,9 @@ public class FilterActivity extends AppCompatActivity {
 
     private Service service;
 
-    private List<String> states;
+    private List<String> list_states;
+
+    private List<State> states;
     private List<Region> regions;
     private List<CityZone> cityZone;
     private List<Location> locations;
@@ -65,6 +67,10 @@ public class FilterActivity extends AppCompatActivity {
 
         this.service = new Service();
         this.states = this.service.getStates();
+        this.list_states = new ArrayList<>();
+        for(int i = 0; i < this.states.size(); i++){
+            this.list_states.add(this.states.get(i).getName());
+        }
 
         //Critérios para ordenação
         this.ordenationDate = false;
@@ -85,7 +91,7 @@ public class FilterActivity extends AppCompatActivity {
         this.spinner_all_city_zone.setVisibility(View.GONE);
         this.spinner_all_location.setVisibility(View.GONE);
 
-        ArrayAdapter<String> dataAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, this.states);
+        ArrayAdapter<String> dataAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, this.list_states);
         this.spinner_all_states.setAdapter(dataAdapter);
         dataAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
 
@@ -328,7 +334,7 @@ public class FilterActivity extends AppCompatActivity {
 
     private void submitFiltersForMain(){
 
-        ReturnFilters returnFilters = new ReturnFilters(arrayFilterLocation[0],
+        Filter filter = new Filter(arrayFilterLocation[0],
                 arrayFilterLocation[1],
                 arrayFilterLocation[2],
                 arrayFilterLocation[3],
@@ -340,7 +346,7 @@ public class FilterActivity extends AppCompatActivity {
                 type_profissional);
 
         Intent resultFilter = new Intent();
-        resultFilter.putExtra("resultFilters", returnFilters);
+        resultFilter.putExtra("resultFilters", filter);
         setResult(RESULT_OK, resultFilter);
         finish();
     }

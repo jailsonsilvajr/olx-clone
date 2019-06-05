@@ -2,7 +2,7 @@ package com.example.olxclone.util;
 
 import java.io.Serializable;
 
-public class ReturnFilters implements Serializable {
+public class Filter implements Serializable {
 
     private int idState;
     private int idRegion;
@@ -17,7 +17,7 @@ public class ReturnFilters implements Serializable {
 
     public static final long  serialVersionUID = 100L;
 
-    public ReturnFilters(int idState, int idRegion, int idCityZone, int idLocation, boolean ordenationDate, boolean ordenationPrice, float priceMin, float priceMax, boolean typeParticular, boolean typeProfissional) {
+    public Filter(int idState, int idRegion, int idCityZone, int idLocation, boolean ordenationDate, boolean ordenationPrice, float priceMin, float priceMax, boolean typeParticular, boolean typeProfissional) {
 
         this.idState = idState;
         this.idRegion = idRegion;

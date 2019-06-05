@@ -2,7 +2,10 @@ package com.example.olxclone.service;
 
 import com.example.olxclone.entity.CityZone;
 import com.example.olxclone.entity.Location;
+import com.example.olxclone.entity.Poster;
 import com.example.olxclone.entity.Region;
+import com.example.olxclone.entity.State;
+import com.example.olxclone.util.Filter;
 
 import java.lang.reflect.Array;
 import java.util.ArrayList;
@@ -12,6 +15,19 @@ import java.util.List;
 public class Service {
 
     private List<String> categories;
+
+    public List<Poster> getPosters(int id_state, int id_region, int id_category, Filter filter){
+
+        List<Poster> posters = new ArrayList<>();
+
+        for(int i = 0; i < 20; i++){
+
+            Poster poster = new Poster(i, "Pneu", 150, 15, 05, 8, 24, "Cabo");
+            posters.add(poster);
+        }
+
+        return posters;
+    }
 
     public List<String> getListCategories(){
 
@@ -33,17 +49,17 @@ public class Service {
         }
     }
 
-    public List<String> getStates(){
+    public List<State> getStates(){
 
-        List<String> states = new ArrayList<>();
-        String[] array = {"Todos os estados", "São Paulo", "Minas Gerais", "Rio de Janeiro", "Bahia",
+        List<State> states = new ArrayList<>();
+        String[] array = {"Brasil", "São Paulo", "Minas Gerais", "Rio de Janeiro", "Bahia",
         "Rio Grande do Sul", "Paraná", "Pernambuco", "Ceará", "Pará", "Maranhão", "Santa Catarina", "Goiás",
         "Paraíba", "Espírito Santo", "Amazonas", "Alagoas", "Piauí", "Rio Grande do Norte", "Mato Grosso",
         "Distrito Federal", "Mato Grosso do Sul", "Sergipe", "Rondônia", "Tocantins", "Acre", "Amapá", "Roraima"};
 
         for(int i = 0; i < array.length; i++){
 
-            states.add(array[i]);
+            states.add(new State(i, array[i]));
         }
 
         return states;

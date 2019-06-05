@@ -11,6 +11,10 @@ import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.olxclone.entity.Region;
+import com.example.olxclone.entity.State;
+import com.example.olxclone.service.Service;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -20,7 +24,14 @@ public class LocationActivity extends AppCompatActivity {
     private List<String> list_states;
     private List<String> list_regions;
 
+    private List<State> states;
+    private List<Region> regions;
+
+    private int id_state_actual;
+
     private boolean see_list_states = true;
+
+    private Service service;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -30,6 +41,10 @@ public class LocationActivity extends AppCompatActivity {
         //Back button on the acationBar:
         getSupportActionBar().setDisplayHomeAsUpEnabled(true); //Show button
         getSupportActionBar().setHomeButtonEnabled(true); //Activate button
+
+        this.regions = new ArrayList<>();
+
+        this.service = new Service();
 
         //ListView:
         this.listView_states = findViewById(R.id.listView_states);
@@ -47,11 +62,13 @@ public class LocationActivity extends AppCompatActivity {
         this.listView_states.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+
+                id_state_actual = position;
                 switch (position){
-                    case 6: addRegionsInArray("Pernambuco"); //Insert regions to ArrayList.
+                    case 7: addRegionsInArray(position); //Insert regions to ArrayList.
                         break;
                 }
-                if(position == 6) changeAdapter(); // REMOVER !!
+                if(position == 7) changeAdapter(); // REMOVER !!
                 else Toast.makeText(getApplicationContext(), "ESCOLHA PERNAMBUCO.", Toast.LENGTH_SHORT).show(); //REMOVER !!!
             }
         });
@@ -67,8 +84,10 @@ public class LocationActivity extends AppCompatActivity {
     }
 
     private void returnResult(int position){
+
         Intent resultIntent = new Intent();
-        resultIntent.putExtra("result", this.list_regions.get(position));
+        resultIntent.putExtra("state", this.states.get(id_state_actual));
+        resultIntent.putExtra("region", this.regions.get(position));
         setResult(RESULT_OK, resultIntent);
         finish();
     }
@@ -88,25 +107,22 @@ public class LocationActivity extends AppCompatActivity {
     }
 
     private void addStatesInArray(){
-        String[] array = {"São Paulo", "Minas Gerais", "Rio de Janeiro", "Bahia",
-                            "Rio Grande do Sul", "Paraná", "Pernambuco", "Ceará", "Pará",
-                            "Maranhão", "Santa Catarina", "Goiás", "Paraíba", "Espírito Santo",
-                            "Amazonas", "Alagoas", "Piauí", "Rio Grande do Norte", "Mato Grosso",
-                            "Distrito Federal", "Mato Grosso do Sul", "Sergipe", "Rondônia",
-                            "Tocantins", "Acre", "Amapá", "Roraima"};
 
-        for(int i = 0; i < array.length; i++){
-            this.list_states.add(array[i]);
+        this.states = this.service.getStates();
+        for(int i = 0; i < this.states.size(); i++){
+
+            this.list_states.add(this.states.get(i).getName());
         }
     }
 
-    private void addRegionsInArray(String state){
+    private void addRegionsInArray(int id_state){
+
+        this.regions = this.service.getRegions(id_state);
         this.list_regions = new ArrayList<>();
-        if(state.equals("Pernambuco")){
-            String[] array = {"Todas as regiões", "DDD 81 - Grande Recife", "DDD 87 - Petrolina, Garanhuns e região"};
-            for(int i = 0; i < array.length; i++){
-                this.list_regions.add(array[i]);
-            }
+
+        for(int i = 0; i < this.regions.size(); i++){
+
+            this.list_regions.add(this.regions.get(i).getName());
         }
     }
 

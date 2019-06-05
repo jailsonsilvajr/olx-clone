@@ -18,9 +18,15 @@ import android.widget.Button;
 import android.widget.ListView;
 import android.widget.Toast;
 
+import com.example.olxclone.entity.Category;
+import com.example.olxclone.entity.CityZone;
+import com.example.olxclone.entity.Location;
 import com.example.olxclone.entity.Poster;
+import com.example.olxclone.entity.Region;
+import com.example.olxclone.entity.State;
+import com.example.olxclone.service.Service;
 import com.example.olxclone.util.AdapterListViewPoster;
-import com.example.olxclone.util.ReturnFilters;
+import com.example.olxclone.util.Filter;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -32,6 +38,12 @@ public class MainActivity extends AppCompatActivity
     private Button button_category;
     private Button button_filters;
 
+    private State state_actual;
+    private Region region_actual;
+
+    private Category category_actual;
+    private Filter filter_actual;
+
     private List<Poster> posters;
 
     private ListView listView_items;
@@ -40,6 +52,8 @@ public class MainActivity extends AppCompatActivity
     private static final int ACTIVITY_LOCATION_REQUEST = 1;
     private static final int ACTIVITY_CATEGORY_REQUEST = 2;
     private static final int ACTIVITY_FILTER_REQUEST = 3;
+
+    private Service service;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -59,31 +73,39 @@ public class MainActivity extends AppCompatActivity
 
         getSupportActionBar().setTitle(""); //"Removendo" o título da activity... Procurar uma forma "mais correta" de fazer isso.
 
+        this.service = new Service();
+
+        //Usar SharedPreference para setar esses dados:
+        this.state_actual = new State(7, "Pernambuco");
+        this.region_actual = new Region(1, "DDD 81 - Grande Recife");
+
+        this.category_actual = new Category(0, "Todas as categorias");
+        this.filter_actual = null;
+
         //Carregar os Buttons:
         this.button_location = (Button) findViewById(R.id.button_location);
         this.button_category = (Button) findViewById(R.id.button_category);
         this.button_filters = (Button) findViewById(R.id.button_filters);
 
-        /*Dados apenas para teste do ListView:*/
-        this.posters = new ArrayList<Poster>();
-        popularList();
-
         this.listView_items = (ListView) findViewById(R.id.listView_items);
-        this.adapterListViewPoster = new AdapterListViewPoster(this, this.posters);
-        listView_items.setAdapter(adapterListViewPoster);
+        changePosters();
 
         //Adicionar função de click aos Buttons e ListView:
         addClick();
     }
 
-    /* Método temporário: */
-    private void popularList(){
+    private void changeDataListView(){
 
-        for(int i = 0; i < 20; i++){
+        this.adapterListViewPoster = new AdapterListViewPoster(this, this.posters);
+        this.listView_items.setAdapter(this.adapterListViewPoster);
+    }
 
-            Poster poster = new Poster(i, "Pneu", 150, 15, 05, 8, 24, "Cabo");
-            this.posters.add(poster);
-        }
+    private void changePosters(){
+
+        this.posters = this.service.getPosters(this.state_actual.getId(), this.region_actual.getId(),
+                this.category_actual.getId(), this.filter_actual);
+
+        changeDataListView();
     }
 
     private void addClick(){
@@ -125,8 +147,10 @@ public class MainActivity extends AppCompatActivity
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         if(requestCode == ACTIVITY_LOCATION_REQUEST){
             if(resultCode == RESULT_OK){
-                String result = data.getStringExtra("result");
-                this.button_location.setText(result);
+
+                this.state_actual = (State) data.getExtras().getSerializable("state");
+                this.region_actual = (Region) data.getExtras().getSerializable("region");
+                this.button_location.setText(this.region_actual.getName());
             }
         }else if(requestCode == ACTIVITY_CATEGORY_REQUEST){
             if(resultCode == RESULT_OK){
@@ -135,7 +159,7 @@ public class MainActivity extends AppCompatActivity
             }
         } else if(requestCode == ACTIVITY_FILTER_REQUEST){
             if(resultCode == RESULT_OK){
-                ReturnFilters returnFilters = (ReturnFilters) data.getExtras().getSerializable("resultFilters");
+                Filter filter = (Filter) data.getExtras().getSerializable("resultFilters");
             }
         }
     }
