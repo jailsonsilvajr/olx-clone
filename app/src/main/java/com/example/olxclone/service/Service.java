@@ -22,7 +22,7 @@ public class Service {
 
     public User login(User user) throws ExecutionException, InterruptedException {
 
-        Login login = new Login(this.url + "login.php", user);
+        Login login = new Login(this.url + "read-one.php", user);
         return login.execute().get();
     }
 

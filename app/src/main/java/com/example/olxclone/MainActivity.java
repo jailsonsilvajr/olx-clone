@@ -16,6 +16,7 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.ListView;
+import android.widget.RelativeLayout;
 import android.widget.Toast;
 
 import com.example.olxclone.entity.Category;
@@ -92,6 +93,12 @@ public class MainActivity extends AppCompatActivity
 
         //Adicionar função de click aos Buttons e ListView:
         addClick();
+    }
+
+    public void login(View v){
+
+        Intent intent = new Intent(MainActivity.this, LoginActivity.class);
+        startActivity(intent);
     }
 
     private void changeDataListView(){
