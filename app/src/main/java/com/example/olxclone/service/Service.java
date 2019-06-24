@@ -5,16 +5,26 @@ import com.example.olxclone.entity.Location;
 import com.example.olxclone.entity.Poster;
 import com.example.olxclone.entity.Region;
 import com.example.olxclone.entity.State;
+import com.example.olxclone.entity.User;
+import com.example.olxclone.http.Login;
 import com.example.olxclone.util.Filter;
 
 import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.concurrent.ExecutionException;
 
 public class Service {
 
     private List<String> categories;
+    private final String url = "http://10.0.2.2/olx-php/api-rest/user/";
+
+    public User login(User user) throws ExecutionException, InterruptedException {
+
+        Login login = new Login(this.url + "login.php", user);
+        return login.execute().get();
+    }
 
     public List<Poster> getPosters(int id_state, int id_region, int id_category, Filter filter){
 
