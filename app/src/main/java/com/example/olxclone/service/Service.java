@@ -9,7 +9,6 @@ import com.example.olxclone.entity.User;
 import com.example.olxclone.http.Login;
 import com.example.olxclone.util.Filter;
 
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -18,7 +17,7 @@ import java.util.concurrent.ExecutionException;
 public class Service {
 
     private List<String> categories;
-    private final String url = "http://10.0.2.2/olx-php/api-rest/user/";
+    private final String url = "http://192.168.0.109/olx-php/api-rest/user/";
 
     public User login(User user) throws ExecutionException, InterruptedException {
 

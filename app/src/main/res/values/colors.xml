@@ -12,4 +12,6 @@
 
     <color name="main_tab">#ffffff</color>
     <color name="location_tab">#ffffff</color>
+
+    <color name="blue_facebook">#524ab3</color>
 </resources>

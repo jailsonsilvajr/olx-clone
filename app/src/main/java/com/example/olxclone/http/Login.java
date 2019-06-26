@@ -1,6 +1,7 @@
 package com.example.olxclone.http;
 
 import android.os.AsyncTask;
+import android.util.Log;
 
 import com.example.olxclone.entity.User;
 import com.google.gson.Gson;
@@ -40,6 +41,8 @@ public class Login extends AsyncTask<Void, Void, User> {
             PrintStream printStream = new PrintStream(connection.getOutputStream());
             printStream.println(userJson);
 
+            connection.connect();
+
             if(connection.getResponseCode() == 200){
 
                 Scanner scanner = new Scanner(connection.getInputStream());
@@ -53,9 +56,9 @@ public class Login extends AsyncTask<Void, Void, User> {
                 return gson.fromJson(resposta, User.class);
             }
         } catch (MalformedURLException e) {
-            e.printStackTrace();
+            Log.i("MalformedURLException", e.getMessage());
         } catch (IOException e) {
-            e.printStackTrace();
+            Log.i("IOException", e.getMessage());
         }
         return null;
     }

@@ -1,10 +1,14 @@
 package com.example.olxclone;
 
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.text.method.LinkMovementMethod;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.olxclone.entity.User;
@@ -13,6 +17,10 @@ import com.example.olxclone.service.Service;
 import java.util.concurrent.ExecutionException;
 
 public class LoginActivity extends AppCompatActivity {
+
+    private TextView tvLogin_forgot_passoword;
+    private TextView tvLogin_register;
+    private TextView tvLogin_terms;
 
     private EditText edLogin_email;
     private EditText edLogin_password;
@@ -25,11 +33,21 @@ public class LoginActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
 
+        //Back button on the acationBar:
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true); //Show button
+        getSupportActionBar().setHomeButtonEnabled(true); //Activate button
+
         this.service = new Service();
+
+        this.tvLogin_forgot_passoword = findViewById(R.id.tvLogin_forgot_password);
+        this.tvLogin_register = findViewById(R.id.tvLogin_register);
+
+        this.tvLogin_terms = findViewById(R.id.tvlogin_terms);
+        this.tvLogin_terms.setMovementMethod(LinkMovementMethod.getInstance());
 
         this.edLogin_email = findViewById(R.id.edLogin_email);
         this.edLogin_password = findViewById(R.id.edLogin_password);
-        this.btnLogin_login = findViewById(R.id.btnLogin_login);
+        this.btnLogin_login = findViewById(R.id.btnLogin_enter);
 
         this.btnLogin_login.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -38,8 +56,14 @@ public class LoginActivity extends AppCompatActivity {
                 User user = new User(0, "", edLogin_email.getText().toString(), edLogin_password.getText().toString());
                 try {
 
-                    User nUser = service.login(user);
-                    if(nUser != null) Toast.makeText(LoginActivity.this, nUser.getEmail(), Toast.LENGTH_LONG).show();
+                    user = service.login(user);
+                    if(user != null) {
+
+                        Intent intent = new Intent();
+                        intent.putExtra("resultUser", user);
+                        setResult(RESULT_OK, intent);
+                        finish();
+                    }
                     else Toast.makeText(LoginActivity.this, "Login FAIL", Toast.LENGTH_LONG).show();
                 } catch (ExecutionException e) {
                     e.printStackTrace();
@@ -48,5 +72,18 @@ public class LoginActivity extends AppCompatActivity {
                 }
             }
         });
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+
+        int id = item.getItemId();
+
+        if(id == android.R.id.home){
+
+            finish();
+            return true;
+        }
+        return false;
     }
 }

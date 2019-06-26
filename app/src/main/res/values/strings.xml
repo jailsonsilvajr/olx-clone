@@ -6,8 +6,8 @@
     <string name="title_activity_filters">Filtrar busca</string>
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
-    <string name="nav_header_title">Jailson S.</string>
-    <string name="nav_header_subtitle">jailson@olx.com</string>
+    <string name="nav_header_title">Acesse sua conta agora!</string>
+    <string name="nav_header_subtitle">Clique aqui</string>
     <string name="nav_header_desc">Navigation header</string>
     <string name="action_settings">Settings</string>
 
@@ -29,8 +29,13 @@
     <string name="location">Localidade</string>
     <string name="category">Categoria</string>
     <string name="filters">Filtros</string>
+    <string name="enter">Entrar</string>
 
     <string name="clone">Clone</string>
 
     <string name="text_my_location_now">Minha localização atual</string>
+
+    <string name="text_forgot_password"><a href="http://www.google.com">Esqueceu sua senha?</a></string>
+    <string name="text_register">Não tem uma conta? <a href="http://www.google.com">Cadastre-se</a></string>
+    <string name="text_terms">Ao continuar, você concorda com os <a href="http://www.google.com">Termos de Uso</a> e a <a href="http://www.google.com">Política de Privacidade</a> da OLX, e também, em receber comunicações via e-mail e push da OLX e seus parceiros.</string>
 </resources>

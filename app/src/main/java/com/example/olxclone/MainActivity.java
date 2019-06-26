@@ -16,24 +16,23 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.ListView;
-import android.widget.RelativeLayout;
-import android.widget.Toast;
+import android.widget.TextView;
 
 import com.example.olxclone.entity.Category;
-import com.example.olxclone.entity.CityZone;
-import com.example.olxclone.entity.Location;
 import com.example.olxclone.entity.Poster;
 import com.example.olxclone.entity.Region;
 import com.example.olxclone.entity.State;
+import com.example.olxclone.entity.User;
 import com.example.olxclone.service.Service;
 import com.example.olxclone.util.AdapterListViewPoster;
 import com.example.olxclone.util.Filter;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
+
+    private NavigationView navigationView; //For get header after login
 
     private Button button_location;
     private Button button_category;
@@ -53,6 +52,7 @@ public class MainActivity extends AppCompatActivity
     private static final int ACTIVITY_LOCATION_REQUEST = 1;
     private static final int ACTIVITY_CATEGORY_REQUEST = 2;
     private static final int ACTIVITY_FILTER_REQUEST = 3;
+    private static final int ACTIVITY_LOGIN_REQUEST = 4;
 
     private Service service;
 
@@ -65,12 +65,12 @@ public class MainActivity extends AppCompatActivity
         setSupportActionBar(toolbar);
 
         DrawerLayout drawer = findViewById(R.id.drawer_layout);
-        NavigationView navigationView = findViewById(R.id.nav_view);
+        this.navigationView = findViewById(R.id.nav_view);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
                 this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
         drawer.addDrawerListener(toggle);
         toggle.syncState();
-        navigationView.setNavigationItemSelectedListener(this);
+        this.navigationView.setNavigationItemSelectedListener(this);
 
         getSupportActionBar().setTitle(""); //"Removendo" o título da activity... Procurar uma forma "mais correta" de fazer isso.
 
@@ -98,7 +98,7 @@ public class MainActivity extends AppCompatActivity
     public void login(View v){
 
         Intent intent = new Intent(MainActivity.this, LoginActivity.class);
-        startActivity(intent);
+        startActivityForResult(intent, ACTIVITY_LOGIN_REQUEST);
     }
 
     private void changeDataListView(){
@@ -167,6 +167,19 @@ public class MainActivity extends AppCompatActivity
         } else if(requestCode == ACTIVITY_FILTER_REQUEST){
             if(resultCode == RESULT_OK){
                 Filter filter = (Filter) data.getExtras().getSerializable("resultFilters");
+            }
+        }else if(requestCode == ACTIVITY_LOGIN_REQUEST){
+
+            if(resultCode == RESULT_OK){
+
+                User user = (User) data.getExtras().getSerializable("resultUser");
+
+                View headerLayout = this.navigationView.getHeaderView(0);
+                TextView tvMenuHeader_name = headerLayout.findViewById(R.id.textView_name);
+                TextView tvMenuHeader_email = headerLayout.findViewById(R.id.textView_email);
+
+                tvMenuHeader_name.setText(user.getName());
+                tvMenuHeader_email.setText(user.getEmail());
             }
         }
     }
